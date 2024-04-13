@@ -5,115 +5,114 @@
 theme: solarized
 # revealOptions:
 #   transition: 'fade'
+# translated from PT to EN by ChatGPT4
 ---
 
 # Metaclasses
 
-## Pra que servem?
+## What are they for?
 
-## Onde vivem?
+## Where do they live?
 
-## Como se reproduzem?
+## How do they reproduce?
 
 Leonardo Rochael Almeida
 
-23-Outubro-2022
+October 23, 2022
 
 Note:
 
 Intro: 5 min.
 
-Lançar IPython em %doctest_mode
+Launch IPython in %doctest_mode
 
-Lançar x11vnc
+Launch x11vnc
 
-Lançar Remote Desktop Viewer
+Launch Remote Desktop Viewer
 
 ---
 
-![Capa Fluent Python 2ª Ed.](img/fluent-python.png)
+![Cover Fluent Python 2nd Ed.](img/fluent-python.png)
 
 Note:
 
-Trabalho com Python há 21 anos.
+I have been working with Python for 21 years.
 
-Meu primeiro emprego com Python foi tendo o Luciano Ramalho como chefe.
+My first job with Python was having Luciano Ramalho as a boss.
 
-E tive a honra de revisar tanto a 1ª quanto a 2ª ed. do Fluent Python.
+And I had the honor of reviewing both the 1st and 2nd ed. of Fluent Python.
 
-E fui vítima da maldição do conhecimento.
+And I was a victim of the curse of knowledge.
 
 ---
 
-## Mas primeiro: dois tipos de métodos
+## But first: two types of methods
 
-* Métodos normais:
-  * Como declarar: `def metodo(self):`
-  * Como usar: `objeto.metodo()`
-* Métodos especiais
-  * Como declarar: `def __str__(self):`
-  * Como usar: `print(objeto)`
+* Normal methods:
+  * How to declare: `def method(self):`
+  * How to use: `object.method()`
+* Special methods
+  * How to declare: `def __str__(self):`
+  * How to use: `print(object)`
 
 Note:
 
-Método normal é o que você acessa com "pontinho".
+A normal method is what you access with a "dot".
 
-Método especial é um que quem normalmente acessa é o Python
-para fazer algo especial com uma instância da sua classe.
+A special method is one that is usually accessed by Python
+to do something special with an instance of your class.
 
 ---
 
-![Tabela de métodos especiais para operações matemáticas](img/special-methods-operators.png)
+![Table of special methods for mathematical operations](img/special-methods-operators.png)
 
 Note:
 
-Fonte: Fluent Python Second Edition
+Source: Fluent Python Second Edition
 
-Por exemplo, esses são todos os métodos especiais que sua classe pode
-implementar, e permitem que a instância da classe participe de operações com
-operadores matemáticos, mais, vezes, etc.
+For example, these are all the special methods that your class can
+implement, and they allow the class instance to participate in operations with
+mathematical operators, plus, times, etc.
 
 ---
 
-![Tabela de métodos especiais exceto para operações matemáticas](img/special-methods-noop.png)
+![Table of special methods except for mathematical operations](img/special-methods-noop.png)
 
 Note:
 
-Fonte: Fluent Python Second Edition
+Source: Fluent Python Second Edition
 
-Já esses métodos especiais são todos os outros que não tem a ver com
-participar de operações.
+These special methods are all the others that do not have to do with
+participating in operations.
 
-Tem métodos especiais para sua classe ser chamada como se fosse uma função,
-indexada como se fosse uma lista ou dicionário, fornecer um comprimento com
-`len()`, especificar sua representação no console etc.
+There are special methods for your class to be called as if it were a function,
+indexed as if it were a list or dictionary, provide a length with
+`len()`, specify its representation on the console, etc.
 
 ---
 
-![Sequência de busca de atributos](img/method-resolution-order.png)
+![Attribute search sequence](img/method-resolution-order.png)
 
 Note:
 
 [Source](https://excalidraw.com/#room=1c8d72d1ecb12684899d,44bhxgUJPAwiO3oXuNRoJw)
 
-Mostrar `slides/code/slide0_methods.py`
+Show `slides/code/slide0_methods.py`
 
 ```text
 from slide0_methods import *
 
+m1 = MyClass()
 
-m1 = MinhaClasse()
+m2 = MySubClass()
 
-m2 = MinhaSubClasse()
-
-
-m1.dobrar()
+m1.double()
 
 m1.x = 7
 
-m1.dobrar()
+m1.double()
 
-m2.dobrar()
+m2.double()
 
 m1
 
@@ -122,70 +121,69 @@ m2
 def __call__(self, other):
     return self.x + other
 
-MinhaClasse.__call__ = __call__
+MyClass.__call__ = __call__
 
 m2(7)
-
 ```
 
 ---
 
-## Sequência de busca: métodos normais
+## Search Sequence: Normal Methods
 
-(e atributos normais)
+(and normal attributes)
 
-0. instância
-1. classe
+0. instance
+1. class
 2. superclasses
 
 ---
 
-## Sequência de busca: métodos especiais
+## Search Sequence: Special Methods
 
-(métodos "dunder": `__...__`)
+("dunder" methods: `__...__`)
 
-0. ~~instância~~ **NÃO**!
-1. classe
+0. ~~instance~~ **NO**!
+1. class
 2. superclasses
 
 ---
 
-## Toda hora é *runtime*
+## It's Always *Runtime*
 
-Em Python declarações de função e de classe "acontecem" em
-**tempo de execução**.
+In Python, function and class declarations "happen" at
+**runtime**.
 
 Note:
 
-Classes são criadas em tempo de execução,
+Classes are created at runtime,
 
-Mas imports só "rodam" o módulo uma vez.
+But imports only "run" the module once.
 
-Demonstrar com prints por todos os lados:
+Demonstrate with prints all around:
 
 * `slides/code/slide1_runtime.py`
 
 ---
 
-## Tudo é objeto (1)
+## Everything is an Object (1)
 
 ![Labels, not Boxes](img/labels-not-boxes.png)
 
 <font size="1">
-Imagem © Luciano Ramalho, usada com permissão
+Image © Luciano Ramalho, used with permission
 </font>
 
-Classes são valores também!
+Classes are values too!
 
 Note:
 
-Em Python, todas as coisas declaradas tem variáveis atribuídas, inclusive
-funções e classes!
+In Python, all declared things have assigned variables, including
+functions and classes!
 
-Classes (e funções) podem ser atribuídas a variáveis, listas e dicionários.
+Classes (and functions) can be assigned to variables, lists, and dictionaries.
 
-Demonstrar sobrescrever as variáveis nas quais as classes foram declaradas,
-e instanciar as classes através das variáveis nas quais foramm salvas.
+Demonstrate overriding the variables in which the classes were declared,
+and instantiate the classes through the variables in which they were saved.
 
 ```text
 a = [1, 2, 3]
@@ -195,21 +193,21 @@ b
 a
 ```
 
-Posso atribuir classes a outras variáveis
+I can assign classes to other variables
 
 ```text
-MinhaClasse2 = MinhaClasse
+MyClass2 = MyClass
 
-instancia2 = MinhaClasse2()
+instance2 = MyClass2()
 
-MinhaClasse = None
+MyClass = None
 
-instancia = MinhaClasse()
+instance = MyClass()
 ```
 
-Posso colocar classes em listas, ou colocá-las em dicionários
+I can put classes in lists, or place them in dictionaries
 
-Inclusive, o conteúdo de módulos importados fica em um dicionário:
+Moreover, the content of imported modules is in a dictionary:
 
 ```text
 slide1_runtime.__dict__.keys()
@@ -217,150 +215,150 @@ slide1_runtime.__dict__.keys()
 {key: value for key, value in slide1_runtime.__dict__.items() if not key.startswith('__')}
 ```
 
-Assim como o conteúdo de classes e instâncias:
+As well as the content of classes and instances:
 
 ```python
 m1.__dict__
-MinhaSubClasse.__dict__
+MySubClass.__dict__
 ```
 
-Como meu amigo Lalo Martins diria:
+As my friend Lalo Martins would say:
 
-> Python é feito apenas de dicionários e toneladas de açúcar sintático
+> Python is made only of dictionaries and tons of syntactic sugar
 
 ---
 
-## As duas responsabilidades de `class`
+## The Two Responsibilities of `class`
 
 ```python
-class Pato:
+class Duck:
     ...
 ```
 
-* Gerar uma classe
-* Atribuir à classe uma variável
-  * Com mesmo nome da classe
+* Generate a class
+* Assign the class to a variable
+  * With the same name as the class
 
 Note:
 
-`class` não é uma "declaração". É um comando estruturado.
+`class` is not a "declaration". It's a structured command.
 
-As mesmas duas responsabilidades valem para `def` e funções.
+The same two responsibilities apply to `def` and functions.
 
-O que significa que dá pra criar classes dentro de funções.
+What this means is that you can create classes inside functions.
 
-E também é possível criar funções dentro de funções.
+And it is also possible to create functions inside functions.
 
 ---
 
-## Tudo é objeto (2)
+## Everything is an Object (2)
 
-Todos os valores têm uma classe
+All values have a class
 
-* inclusive classes!
+* including classes!
 
 Note:
 
-Demonstrar `obj.__class__`, `type(obj)` e `isinstance(obj, class)`
+Demonstrate `obj.__class__`, `type(obj)`, and `isinstance(obj, class)`
 
 ```text
-pato.__class__
-type(pato)
+duck.__class__
+type(duck)
 
-pato.__class__ is type(pato)
+duck.__class__ is type(duck)
 
-pato.__class__ is slide1_runtime.Pato
+duck.__class__ is slide1_runtime.Duck
 
 ```
 
 ---
 
-## Tudo é objeto (3)
+## Everything is an Object (3)
 
-* Criando classes dinamicamente
+* Creating classes dynamically
 
 Note:
 
-demonstrar `slides/code/slide5_dynamic_class.py`
+demonstrate `slides/code/slide5_dynamic_class.py`
 
 ```text
 from slide5_dynamic_class import *
 
-m3 = MinhaSubClasse()
-m3.dobrar()
-m3.somar()
+m3 = MySubClass()
+m3.double()
+m3.add()
 
-MinhaSubClasse.__class__
+MySubClass.__class__
 
-MinhaOutraSubClasse = meu_gerador_de_subclasse(27)
+MyOtherSubClass = my_subclass_generator(27)
 
-m4 = MinhaOutraSubClasse()
-m4.dobrar()
-m4.somar()
+m4 = MyOtherSubClass()
+m4.double()
+m4.add()
 
-MinhaOutraSubClasse.__bases__
-MinhaOutraSubClasse.__name__
-MinhaOutraSubClasse.__class__
+MyOtherSubClass.__bases__
+MyOtherSubClass.__name__
+MyOtherSubClass.__class__
 
-MinhaSubClasseMaisDinamica = type(
-    'MinhaSubClasseMaisDinamica',  # o nome da classe
-    (MinhaClasse, MeuMixin),  # superclasses
-    {'x': 27},  # "namespace" da classe
+MyMostDynamicSubClass = type(
+    'MyMostDynamicSubClass',  # the class name
+    (MyClass, MyMixin),  # superclasses
+    {'x': 27},  # class "namespace"
 )
 
-# Inclusive com métodos
+# Including with methods
 
 def __init__(self, x):
     self.x = x
 
-MinhaSubClasseRealmenteDinamica = type(
-    'MinhaSubClasseRealmenteDinamica',
-    (MinhaClasse, MeuMixin),
+MyReallyDynamicSubClass = type(
+    'MyReallyDynamicSubClass',
+    (MyClass, MyMixin),
     {'__init__': __init__},
 )
 ```
 
-Para criar uma instância, eu invoco a classe.
+To create an instance, I invoke the class.
 
-Para criar dinamicamente uma classe, eu invoco a classe da classe.
-
----
-
-![Relações de Classe](img/class-relationships-1.svg)
-
-Note:
-
-[Origem](https://excalidraw.com/#room=238469586b20a3132da2,8WP2bHrBNSR7GZ257qVWRA)
+To dynamically create a class, I invoke the class of the class.
 
 ---
 
-## Metaclasse: a classe da classe
-
-* `type`: a classe das classes por padrão
-  * 1 parâmetro: retorna a classe de um objeto
-  * 3 parâmetros: cria uma nova classe
+![Class Relationships](img/class-relationships-1.svg)
 
 Note:
 
-Metaclasse é o nome que damos à classe de uma classe
+[Origin](https://excalidraw.com/#room=238469586b20a3132da2,8WP2bHrBNSR7GZ257qVWRA)
 
-E `type` é a metaclasse padrão de todas as classes
+---
+
+## Metaclass: The Class of the Class
+
+* `type`: the default class of classes
+  * 1 parameter: returns the class of an object
+  * 3 parameters: creates a new class
+
+Note:
+
+Metaclass is the name we give to the class of a class
+
+And `type` is the default metaclass for all classes
 
 ---
 
 ## "`type`" & "`object`"
 
-uma relação peculiar
+a peculiar relationship
 
-![Relações entre type e object](img/object-type-relationship.png)
+![Relationships between type and object](img/object-type-relationship.png)
 
 Note:
 
-[Origem](https://excalidraw.com/#room=1f3517d27415d387d3ff,go5T1JAv3yH1fx5wenTlqA)
+[Origin](https://excalidraw.com/#room=1f3517d27415d387d3ff,go5T1JAv3yH1fx5wenTlqA)
 
-Mas se `type` é uma (meta)classe, de quem ela é subclasse?
+But if `type` is a (meta)class, whose subclass is it?
 
-E se `object`, que é uma classe, também é uma instância, quem é a classe de
+And if `object`, which is a class, is also an instance, who is the class of
 `object`?
 
 ```text
@@ -376,41 +374,41 @@ E se `object`, que é uma classe, também é uma instância, quem é a classe de
 ()
 ```
 
-**A relação entre `object` e `type` não pode ser construída em Python.**
+**The relationship between `object` and `type` cannot be constructed in Python.**
 
-Faz parte da definição da linguagem.
+It is part of the language definition.
 
 ---
 
-## Criando novas metaclasses
+## Creating New Metaclasses
 
-* Herdando de `type`
+* Inheriting from `type`
 
-```python
+$$$python
 class better_repr_type(type):
     ...
-```
+$$$
 
 Note:
 
-Se `type` é uma classe, posso herdar de `type`?
+If `type` is a class, can I inherit from `type`?
 
 `slides/code/slide9_better_repr.py`
 
-```text
+$$$text
 
 from slide9_better_repr import *
 
-MinhaSubClasseComRepr = better_repr_type(
-    'MinhaSubClasseComRepr',  # nome
-    (MinhaClasse, MeuMixin),  # bases
-    {'__init__': __init__},   # atributos / métodos
+MySubClassWithRepr = better_repr_type(
+    'MySubClassWithRepr',  # name
+    (MyClass, MyMixin),  # bases
+    {'__init__': __init__},   # attributes / methods
 )
-```
+$$$
 
 ---
 
-![Relações de classe com metaclasse](img/class-relationships-2.png)
+![Class relationships with metaclass](img/class-relationships-2.png)
 
 Note:
 
@@ -418,160 +416,160 @@ Note:
 
 ---
 
-## Usando metaclasses em classes "normais"
+## Using Metaclasses in "Normal" Classes
 
-```python
-class MinhaClasse(Super, ..., metaclass=MinhaMetaClasse):
+$$$python
+class MyClass(Super, ..., metaclass=MyMetaClass):
     ...
-```
+$$$
 
 Note:
 
-```python
-class MinhaSubClasseComRepr2(MinhaClasse, metaclass=better_repr_type):
+$$$python
+class MySubClassWithRepr2(MyClass, metaclass=better_repr_type):
     def __init__(self, x):
         self.x = x
-```
+$$$
 
 ---
 
-## Mas pra que servem afinal? (1)
+## But What Are They For After All? (1)
 
-* Dar métodos especiais às classes
+* Provide special methods to classes
   * `__repr__`
   * `__getitem__`
   * `__(...)__`
 
 ---
 
-## Mas pra que servem afinal? (2)
+## But What Are They For After All? (2)
 
-* Preparar o `namespace` (`.__dict__`) de uma classe
-* Interceptar/registrar/customizar criação de classes
-* Manipular métodos e atributos da classe durante criação
-* Interceptar/customizar criação de instâncias
+* Prepare the `namespace` (`.__dict__`) of a class
+* Intercept/register/customize class creation
+* Manipulate methods and attributes of the class during creation
+* Intercept/customize instance creation
 
 Note:
 
 `slides/code/slide12_walkthru.py`
 
-Walkthru completo do processo de declaração de uma classe
+Complete walkthrough of the class declaration process
 
-Debugar passo a passo no vs.code
+Debug step by step in vs.code
 
-Sobrescrever o `__call__` da metaclasse pra retornar `None`.
+Override the `__call__` of the metaclass to return `None`.
 
-* Interceptar/customizar criação de instâncias
+* Intercept/customize instance creation
   * `__call__`
-    * Redundante com `__new__` da classe
+    * Redundant with `__new__` of the class
 
 ---
 
-## Pra que NÃO servem?
+## What They Are NOT For
 
-* Influenciar instâncias depois de criadas
-* Fornecer atributos ou métodos **normais** às classes
-  * apenas métodos especiais!
+* Influence instances after they are created
+* Provide **normal** attributes or methods to classes
+  * only special methods!
 
 Note:
 
-MRO de atributos normais nunca passa pela metaclasse.
+MRO of normal attributes never passes through the metaclass.
 
 ---
 
-## Você (provavelmente) nunca vai precisar de metaclasses (1)
+## You (Probably) Will Never Need Metaclasses (1)
 
 * `SuperClass.__init_subclass__()`
-  * Invocado a cada subclasse declarada
-    * Mesmo nas subclasses indiretas
-  * Mas não na classe onde é declarada
+  * Invoked for each declared subclass
+    * Even in indirect subclasses
+  * But not in the class where it is declared
 
 ---
 
-## Você (provavelmente) nunca vai precisar de metaclasses (2)
+## You (Probably) Will Never Need Metaclasses (2)
 
-Decoradores:
+Decorators:
 
-```python
-@decorador
-class MinhaClasse:
+$$$python
+@decorator
+class MyClass:
     ...
-```
+$$$
 
-* Um bom exemplo:
+* A good example:
   * `@dataclasses.dataclass`
 
 Note:
 
-Um decorador recebe a classe já pronta, e têm a oportunidade de modificá-la, e
-até substituí-la, antes de retorná-la.
+A decorator receives the class already made, and has the opportunity to modify it, and
+even replace it, before returning it.
 
-Um bom exemplo existente é `@dataclass`, que cria métodos nas suas classes.
+A good existing example is `@dataclass`, which creates methods in your classes.
 
 ---
 
-## Você (provavelmente) nunca vai precisar de metaclasses (3)
+## You (Probably) Will Never Need Metaclasses (3)
 
 * `__class_getitem__`
-  * Usado pelo Python para *type hints*
+  * Used by Python for *type hints*
 
-```python
+$$$python
 def print_steps(steps: list[str]): ...
-```
+$$$
 
 Note:
 
-Mostrar `slides/code/slide20_meta_alternatives.py`
+Show `slides/code/slide20_meta_alternatives.py`
 
-```python
+$$$python
 from slide20_meta_alternatives import *
 
-Anseriforme['Pato']
+Anseriformes['Duck']
 
-@verifica_anseriforme
-class Cachorro(Pato):
+@check_anseriformes
+class Dog(Duck):
     def quack(self):
-        print("au, au!")
+        print("woof, woof!")
 
-class Gato(Pato):
+class Cat(Duck):
     def quack(self):
-        print("miau!")
+        print("meow!")
 
-Anseriforme['Cachorro']
+Anseriformes['Dog']
 
-```
+$$$
 
 ---
 
-## Classes também aceitam palavras chaves
+## Classes Also Accept Keywords
 
-```python
-class MinhaSubClasse(SuperCls, palavra='Chave', numero=42):
+$$$python
+class MySubClass(SuperCls, keyword='Key', number=42):
     ...
-```
+$$$
 
-* Mas é necessário consumi-las:
-  * Onde:
+* But it is necessary to consume them:
+  * Where:
     * `MetaClass.__new__()`
     * `SuperClass.__init_subclass__()`
-  * Pois `object.__init_subclass__()` não as aceita.
+  * Because `object.__init_subclass__()` does not accept them.
 
 Note:
 
-E já que estamos falando de customização de classes, uma coisa interessante é
-que classes aceitam *keyword arguments* além de `metaclasse=`
+And since we are talking about class customization, an interesting thing is
+that classes accept *keyword arguments* beyond `metaclass=`
 
-Devem ser consumidas no `__new__` da metaclasse, ou no `__init_subclass__` de
-uma classe mãe.
+They must be consumed in the `__new__` of the metaclass, or in the `__init_subclass__` of
+a parent class.
 
-Abrir `slides/code/slide12_walkthru.py` ao lado de
-`slides/code/slide23_keywords.py` e debugar.
+Open `slides/code/slide12_walkthru.py` next to
+`slides/code/slide23_keywords.py` and debug.
 
 ---
 
-## SQLModel: exemplo de palavra chave em classes
+## SQLModel: An Example of Keyword in Classes
 
-```python
+$$$python
 from sqlmodel import Field, SQLModel
 
 class Hero(SQLModel, table=True):
@@ -579,65 +577,65 @@ class Hero(SQLModel, table=True):
     name: str
     secret_name: str
     age: int
-```
+$$$
 
 * https://sqlmodel.tiangolo.com/
 
 Note:
 
-A ausência do `table=` indica que o ORM não deve criar
-uma tabela para registros desta classe.
+The absence of `table=` indicates that the ORM should not create
+a table for records of this class.
 
-Mas subclasses de uma tal classe podem declarar `table`.
+But subclasses of such a class may declare `table`.
 
 ---
 
-## Resumindo
+## In Summary
 
-* Tudo tem classes, inclusive as classes
-* Metaclasses fornecem métodos especiais para classes
-  * E apenas métodos especiais
-* Metaclasses não têm nenhuma influência sobre instâncias da classe
-  * busca de métodos/atributos não flui pra metaclasse
-* Você pode criar (meta)classes pras suas classes
-  * Mas provavelmente não precisa
+* Everything has classes, including the classes
+* Metaclasses provide special methods for classes
+  * And only special methods
+* Metaclasses have no influence over instances of the class
+  * method/attribute search does not flow to the metaclass
+* You can create (meta)classes for your classes
+  * But you probably don't need to
 
 Note:
 
-Tem gente que acha que Python é uma linguagem objetificante... Tudo é objeto!
+Some people think that Python is an objectifying language... Everything is an object!
 
-Eu prefiro pensar que Python é uma linguagem muito classuda! Tudo tem muita classe!
+I prefer to think that Python is a very classy language! Everything has a lot of class!
 
-Metaclasses ajudam a linguagem a evoluir (`__init_subclass__`, `__class_getitem__`).
+Metaclasses help the language evolve (`__init_subclass__`, `__class_getitem__`).
 
-Metaclasse é pra quem está fazendo frameworks, como SQLAlchemy ou Pydantic.
+Metaclass is for those making frameworks, like SQLAlchemy or Pydantic.
 
-Se você se pergunta se precisa usar metaclasses, certeza que não precisa ;-)
+If you're wondering if you need to use metaclasses, you definitely don't need to ;-)
 
-Quem precisa sabe exatamente porque precisa.
+Those who need them know exactly why they need them.
 
 ---
 
-## Perguntas?
+## Questions?
 
 ----
 
-```python
+$$$python
 from autostring import AutoString
 
-class SaborDeSorvete(AutoString):
-    creme
-    morango
+class IceCreamFlavor(AutoString):
+    cream
+    strawberry
     chocolate
-```
+$$$
 
 ---
 
-## Obrigado!
+## Thank You!
 
 GH: [leorochael/2022-10-23-Talk-PythonBrasil-Metaclasses](https://github.com/leorochael/2022-10-23-Talk-PythonBrasil-Metaclasses)
 
-![QR Code para a URL do github desta palestra](img/github-talk-qrcode.png#img-float-right)
+![QR Code for the URL of this talk's github](img/github-talk-qrcode.png#img-float-right)
 
 https://www.linkedin.com/in/leorochael/
 
@@ -646,5 +644,5 @@ Telegram: `@LeoRochael`
 email: `leorochael@gmail.com`
 
 <font size="4" style="text-align: left">
-PS: Quer trabalhar em Berlin? Fale comigo! Pessoa Dev. Sr. ou Data Eng. Sr. q
+PS: Want to work in Berlin? Talk to me! Senior Dev or Sr Data Eng.
 </font>
