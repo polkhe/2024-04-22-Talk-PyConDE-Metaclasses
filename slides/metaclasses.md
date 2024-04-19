@@ -57,7 +57,7 @@ And I was a victim of the curse of knowledge.
 
 Note:
 
-A normal method is what you access with a "dot".
+A normal method is what you access with the little dot.
 
 A special method is one that is usually accessed by Python
 to do something special with an instance of your class.
@@ -83,7 +83,7 @@ Note:
 Source: Fluent Python Second Edition
 
 These special methods are all the others that do not have to do with
-participating in operations.
+participating in math operations.
 
 There are special methods for your class to be called as if it were a function,
 indexed as if it were a list or dictionary, provide a length with
@@ -91,7 +91,7 @@ indexed as if it were a list or dictionary, provide a length with
 
 ---
 
-![Attribute search sequence](img/method-resolution-order.png)
+![Attribute resolution order](img/method-resolution-order.png)
 
 Note:
 
@@ -128,7 +128,7 @@ m2(7)
 
 ---
 
-## Search Sequence: Normal Methods
+## Resolution order: Normal Methods
 
 (and normal attributes)
 
@@ -138,7 +138,7 @@ m2(7)
 
 ---
 
-## Search Sequence: Special Methods
+## Resolution order: Special Methods
 
 ("dunder" methods: `__...__`)
 
@@ -148,7 +148,7 @@ m2(7)
 
 ---
 
-## It's Always *Runtime*
+## Every time is *Runtime*
 
 In Python, function and class declarations "happen" at
 **runtime**.
@@ -177,7 +177,7 @@ Classes are values too!
 
 Note:
 
-In Python, all declared things have assigned variables, including
+In Python, all declared things are assigned to variables, including
 functions and classes!
 
 Classes (and functions) can be assigned to variables, lists, and dictionaries.
@@ -207,7 +207,7 @@ instance = MyClass()
 
 I can put classes in lists, or place them in dictionaries
 
-Moreover, the content of imported modules is in a dictionary:
+By the way, the contents of imported modules is in a dictionary:
 
 ```text
 slide1_runtime.__dict__.keys()
@@ -215,7 +215,7 @@ slide1_runtime.__dict__.keys()
 {key: value for key, value in slide1_runtime.__dict__.items() if not key.startswith('__')}
 ```
 
-As well as the content of classes and instances:
+Classes and instances attributes too:
 
 ```python
 m1.__dict__
@@ -236,12 +236,12 @@ class Duck:
 ```
 
 * Generate a class
-* Assign the class to a variable
+* Assign to the class a variable
   * With the same name as the class
 
 Note:
 
-`class` is not a "declaration". It's a structured command.
+`class` is not a "declaration". It is a "compound statement".
 
 The same two responsibilities apply to `def` and functions.
 
@@ -306,7 +306,7 @@ MyMostDynamicSubClass = type(
     {'x': 27},  # class "namespace"
 )
 
-# Including with methods
+# Even including methods
 
 def __init__(self, x):
     self.x = x
@@ -318,9 +318,9 @@ MyReallyDynamicSubClass = type(
 )
 ```
 
-To create an instance, I invoke the class.
+To create an instance, I call the class.
 
-To dynamically create a class, I invoke the class of the class.
+To dynamically create a class, I call the class of the class.
 
 ---
 
@@ -334,7 +334,7 @@ Note:
 
 ## Metaclass: The Class of the Class
 
-* `type`: the default class of classes
+* `type`: the class of classes (by default)
   * 1 parameter: returns the class of an object
   * 3 parameters: creates a new class
 
@@ -384,10 +384,10 @@ It is part of the language definition.
 
 * Inheriting from `type`
 
-$$$python
+```python
 class better_repr_type(type):
     ...
-$$$
+```
 
 Note:
 
@@ -395,7 +395,7 @@ If `type` is a class, can I inherit from `type`?
 
 `slides/code/slide9_better_repr.py`
 
-$$$text
+```text
 
 from slide9_better_repr import *
 
@@ -404,11 +404,11 @@ MySubClassWithRepr = better_repr_type(
     (MyClass, MyMixin),  # bases
     {'__init__': __init__},   # attributes / methods
 )
-$$$
+```
 
 ---
 
-![Class relationships with metaclass](img/class-relationships-2.png)
+![Class relations with metaclass](img/class-relationships-2.png)
 
 Note:
 
@@ -418,22 +418,22 @@ Note:
 
 ## Using Metaclasses in "Normal" Classes
 
-$$$python
+```python
 class MyClass(Super, ..., metaclass=MyMetaClass):
     ...
-$$$
+```
 
 Note:
 
-$$$python
+```python
 class MySubClassWithRepr2(MyClass, metaclass=better_repr_type):
     def __init__(self, x):
         self.x = x
-$$$
+```
 
 ---
 
-## But What Are They For After All? (1)
+## But What Are They For, Actually? (1)
 
 * Provide special methods to classes
   * `__repr__`
@@ -473,28 +473,28 @@ Override the `__call__` of the metaclass to return `None`.
 
 Note:
 
-MRO of normal attributes never passes through the metaclass.
+MRO of normal class attributes never passes through the metaclass.
 
 ---
 
-## You (Probably) Will Never Need Metaclasses (1)
+## You Will (Probably) Never Write Metaclasses (1)
 
 * `SuperClass.__init_subclass__()`
-  * Invoked for each declared subclass
+  * Called for each declared subclass
     * Even in indirect subclasses
   * But not in the class where it is declared
 
 ---
 
-## You (Probably) Will Never Need Metaclasses (2)
+## You Will (Probably) Never Write Metaclasses (2)
 
 Decorators:
 
-$$$python
+```python
 @decorator
 class MyClass:
     ...
-$$$
+```
 
 * A good example:
   * `@dataclasses.dataclass`
@@ -508,20 +508,20 @@ A good existing example is `@dataclass`, which creates methods in your classes.
 
 ---
 
-## You (Probably) Will Never Need Metaclasses (3)
+## You Will (Probably) Never Write Metaclasses (3)
 
 * `__class_getitem__`
   * Used by Python for *type hints*
 
-$$$python
+```python
 def print_steps(steps: list[str]): ...
-$$$
+```
 
 Note:
 
 Show `slides/code/slide20_meta_alternatives.py`
 
-$$$python
+```python
 from slide20_meta_alternatives import *
 
 Anseriformes['Duck']
@@ -537,16 +537,16 @@ class Cat(Duck):
 
 Anseriformes['Dog']
 
-$$$
+```
 
 ---
 
 ## Classes Also Accept Keywords
 
-$$$python
+```python
 class MySubClass(SuperCls, keyword='Key', number=42):
     ...
-$$$
+```
 
 * But it is necessary to consume them:
   * Where:
@@ -569,7 +569,7 @@ Open `slides/code/slide12_walkthru.py` next to
 
 ## SQLModel: An Example of Keyword in Classes
 
-$$$python
+```python
 from sqlmodel import Field, SQLModel
 
 class Hero(SQLModel, table=True):
@@ -577,13 +577,13 @@ class Hero(SQLModel, table=True):
     name: str
     secret_name: str
     age: int
-$$$
+```
 
 * https://sqlmodel.tiangolo.com/
 
 Note:
 
-The absence of `table=` indicates that the ORM should not create
+A missing or false value for `table=` indicates that the ORM should not create
 a table for records of this class.
 
 But subclasses of such a class may declare `table`.
@@ -604,7 +604,7 @@ Note:
 
 Some people think that Python is an objectifying language... Everything is an object!
 
-I prefer to think that Python is a very classy language! Everything has a lot of class!
+I prefer to think that Python is a classy language! Everything has class!
 
 Metaclasses help the language evolve (`__init_subclass__`, `__class_getitem__`).
 
@@ -618,16 +618,16 @@ Those who need them know exactly why they need them.
 
 ## Questions?
 
-----
+---
 
-$$$python
+```python
 from autostring import AutoString
 
 class IceCreamFlavor(AutoString):
     cream
     strawberry
     chocolate
-$$$
+```
 
 ---
 
@@ -644,5 +644,5 @@ Telegram: `@LeoRochael`
 email: `leorochael@gmail.com`
 
 <font size="4" style="text-align: left">
-PS: Want to work in Berlin? Talk to me! Senior Dev or Sr Data Eng.
+PS: Want a job? HelloFresh is hiring!
 </font>
