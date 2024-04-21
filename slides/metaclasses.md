@@ -16,9 +16,9 @@ theme: solarized
 
 ## How do they reproduce?
 
-Leonardo Rochael Almeida
+Leonardo Rochael & Luciano Ramalho
 
-October 23, 2022
+22 April, 2024
 
 Note:
 
@@ -28,7 +28,7 @@ Launch IPython in %doctest_mode
 
 Launch x11vnc
 
-Launch Remote Desktop Viewer
+Launch Remote Desktop Viewer, move it to the beamer display.
 
 ---
 
@@ -43,6 +43,9 @@ My first job with Python was having Luciano Ramalho as a boss.
 And I had the honor of reviewing both the 1st and 2nd ed. of Fluent Python.
 
 And I was a victim of the curse of knowledge.
+
+* Teaching metaclasses is going to be easy
+  * I realized I only have to teach a third of Luciano's book before I can do that...
 
 ---
 
@@ -395,9 +398,13 @@ If `type` is a class, can I inherit from `type`?
 
 `slides/code/slide9_better_repr.py`
 
-```text
+```python
+from slide5_dynamic_class import MyClass, MyMixin
 
-from slide9_better_repr import *
+from slide9_better_repr import better_repr_type
+
+def __init__(self, x):
+    self.x = x
 
 MySubClassWithRepr = better_repr_type(
     'MySubClassWithRepr',  # name
@@ -426,6 +433,10 @@ class MyClass(Super, ..., metaclass=MyMetaClass):
 Note:
 
 ```python
+from slide5_dynamic_class import MyClass
+
+from slide9_better_repr import better_repr_type
+
 class MySubClassWithRepr2(MyClass, metaclass=better_repr_type):
     def __init__(self, x):
         self.x = x
@@ -529,11 +540,18 @@ A good existing example is `@dataclass`, which creates methods in your classes.
 
 ## `__class_getitem__`
 
-* `SuperClass.__class_getitem__`
-  * Used by Python for *type hints*
+* Used by Python for *type hints*
+  * I.e. for typing collection items, generics
 
 ```python
 def print_steps(steps: list[str]): ...
+
+REGISTRY: Mapping[str, MyClass] = {}
+
+COORDINATES: list[tuple[int, int]] = [
+  (-2, 5),
+  (3, 7)
+]
 ```
 
 Note:
@@ -548,9 +566,9 @@ Show `slides/code/slide20_meta_alternatives.py`
 ```python
 from slide20_meta_alternatives import *
 
-Anseriformes['Duck']
+Waterfowl['Duck']
 
-@check_anseriformes
+@check_waterfowl
 class Dog(Duck):
     def quack(self):
         print("woof, woof!")
@@ -559,9 +577,12 @@ class Cat(Duck):
     def quack(self):
         print("meow!")
 
-Anseriformes['Dog']
+Waterfowl['Dog']
 
 ```
+
+Notice: Using `__class__getitem__` this way prevents the use of your class with
+Python Generics.
 
 ---
 
@@ -622,7 +643,7 @@ But subclasses of such a class may declare `table`.
   * And only special methods
 * Metaclasses have no influence over instances of the class
 * You can create (meta)classes for your classes
-  * But you probably don't need to
+  * But you'll probably not need to
 
 Note:
 
@@ -634,11 +655,21 @@ I prefer to think that Python is a classy language! Everything has class!
 
 Metaclasses help the language evolve (`__init_subclass__`, `__class_getitem__`).
 
-Metaclass is for those making frameworks, like SQLAlchemy or Pydantic.
+Metaclass is for making frameworks, like SQLAlchemy or Pydantic.
 
-If you're wondering if you need to use metaclasses, you definitely don't need to ;-)
+---
 
-Those who need them know exactly why they need them.
+> [Metaclasses] are deeper magic than 99% of users should ever worry about. If you
+wonder whether you need them, you don’t (the people who actually need them know
+with certainty that they need them, and don’t need an explanation about why).
+
+  — Tim Peters, inventor of the timsort algorithm and prolific Python contributor
+
+Note:
+
+So why study them?
+
+It's important to understand how they work when you bump into them.
 
 ---
 
@@ -649,19 +680,27 @@ Those who need them know exactly why they need them.
 ```python
 from autostring import AutoString
 
-class IceCreamFlavor(AutoString):
-    cream
-    strawberry
+class Flavour(AutoString):
+    vanilla
+    banana
     chocolate
+```
+
+Note:
+
+```python
+Flavour.vanilla
+
+Flavour.banana
+
+Flavour.chocolate
 ```
 
 ---
 
 ## Thank You!
 
-GH: [leorochael/2022-10-23-Talk-PythonBrasil-Metaclasses](https://github.com/leorochael/2022-10-23-Talk-PythonBrasil-Metaclasses)
-
-![QR Code for the URL of this talk's github](img/github-talk-qrcode.png#img-float-right)
+GH: [leorochael/2024-04-22-Talk-PyConDE-Metaclasses](https://github.com/leorochael/2024-04-22-Talk-PyConDE-Metaclasses)
 
 https://www.linkedin.com/in/leorochael/
 
@@ -672,3 +711,14 @@ email: `leorochael@gmail.com`
 <font size="4" style="text-align: left">
 PS: Want a job? HelloFresh is hiring!
 </font>
+
+Note:
+
+TODO:
+
+* Create exercises
+* Decide how to share code
+  * Binder
+  * Google Drive Collaboratory
+  * Github Codespaces
+* Merge HF theme

@@ -1,16 +1,16 @@
 # Metaclasses:
 
-## Pra que servem? Onde vivem? Como se reproduzem?
+## What are they for? Where do they live? How do they reproduce?
 
-Palestra [ministrada em 23 de outubro de 2022](https://pretalx.com/python-brasil-2022/talk/YA9ZWD/)
-na [PythonBrasil em Manaus](https://2022.pythonbrasil.org.br/).
+Talk [presented on 22 April 2024](https://pretalx.com/pyconde-pydata-2024/talk/BKBNRF/)
+at [PyConDEPyCon DE & PyData Berlin 2024](https://2024.pycon.de/).
 
-Os slides, com suas notas, estão todos em um único arquivo
-[`metaclasses.md` na pasta `slides`](slides/metaclasses.md).
+Slides with their notes are in a single file:
+[`metaclasses.md` on the `slides` folder](slides/metaclasses.md).
 
-## Apresentando
+## Presenting
 
-Se você rodar `make run`, pode apontar um browser para a url
-[localhost:1948/metaclasses.md](http://localhost:1948/metaclasses.md) e os
-slides serão servidos com `Reveal.js` pelo projeto
+You can run `make run`, then point a browser to
+[localhost:1948/metaclasses.md](http://localhost:1948/metaclasses.md). The
+slides will be served with `Reveal.js` by the project
 [reveal-md](https://github.com/webpro/reveal-md).

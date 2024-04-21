@@ -20,8 +20,8 @@ class MySubClass(MyClass, MyMixin):
 
 def my_subclass_builder(new_x):
 
-    class MySubClassDinamica(MyClass, MyMixin):
+    class MyDynamicSubClass(MyClass, MyMixin):
 
         x = new_x
 
-    return MySubClassDinamica
+    return MyDynamicSubClass

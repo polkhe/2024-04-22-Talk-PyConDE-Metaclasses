@@ -12,10 +12,12 @@ class better_repr_type(type):
             cls = self.__class__
             return f'{cls.__name__}({attr_repr})'
 
-        # injecting __repr__ method into the class under construction
+        # Injecting instance method:
         cls.__repr__ = __repr__
 
-    # used by the class under construction itself
+        super().__init__(name, bases, namespace_dict)
+
+    # Method for use by the class under construction itself
     def __repr__(cls):
         bases = ', '.join(c.__name__ for c in cls.__bases__)
         return f'{cls.__name__}({bases})'

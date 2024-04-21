@@ -1,43 +1,46 @@
+from collections.abc import Mapping
+
+
 class MetaWaterfowl(type):
 
     def __init__(cls, cls_name, bases, cls_dict, **kw):
-        print(f'** __init__ in metaclass para', cls_name)
+        print('** __init__ in metaclass for', cls_name)
         super().__init__(cls_name, bases, cls_dict, **kw)
 
     def __repr__(cls):
         cls_name = cls.__name__
-        return f"<Classe para fazer {cls_name!r}>"
+        return f"<Class for making {cls_name!r}>"
 
 
 class Waterfowl(metaclass=MetaWaterfowl):
 
-    registro = {}
+    registry: Mapping[str, type] = {}
 
     def __init_subclass__(subclass):
-        print(f'** registrando', subclass.__name__)
-        subclass.registro[subclass.__name__] = subclass
+        print('** registering', subclass.__name__)
+        subclass.registry[subclass.__name__] = subclass
 
     def __class_getitem__(cls, name):
-        return cls.registro[name]
+        return cls.registry[name]
 
 
 VALID_ANATIDAE = {
     'Duck',
-    'Ganso',
-    'Marreco',
-    'Cisne',
+    'Goose',
+    'Drake',
+    'Swan',
 }
 
-def verifica_Waterfowl(cls):
-    print("** verificando:", cls.__name__)
+def check_waterfowl(cls):
+    print("** verifying:", cls.__name__)
     name = cls.__name__
     if name not in VALID_ANATIDAE:
         raise RuntimeError(
-            f"{name} is not quacky enough."
+            f"What a quack! {name} is not quacky enough."
         )
 
 
-@verifica_Waterfowl
+@check_waterfowl
 class Duck(Waterfowl):
 
     def quack(self):
