@@ -95,7 +95,7 @@ indexed as if it were a list or dictionary, provide a length with
 
 Note:
 
-[Source](https://excalidraw.com/#room=1c8d72d1ecb12684899d,44bhxgUJPAwiO3oXuNRoJw)
+[Source](https://excalidraw.com/#room=0604fda9fd149a1a9bee,MWy-2_D7UHMOLpjI1FBQkg)
 
 Show `slides/code/slide0_methods.py`
 
@@ -324,7 +324,7 @@ To dynamically create a class, I call the class of the class.
 
 ---
 
-![Class Relationships](img/class-relationships-1.svg)
+![Class Relationships](img/class-relationships-1.png)
 
 Note:
 
@@ -354,7 +354,7 @@ a peculiar relationship
 
 Note:
 
-[Origin](https://excalidraw.com/#room=1f3517d27415d387d3ff,go5T1JAv3yH1fx5wenTlqA)
+[Origin](https://excalidraw.com/#room=9673f531c8cb68d7d95b,Sy0AEIfazTjwBzPK9OUO6A)
 
 But if `type` is a (meta)class, whose subclass is it?
 
@@ -412,7 +412,7 @@ MySubClassWithRepr = better_repr_type(
 
 Note:
 
-[Source](https://excalidraw.com/#room=1076797d69bd2c569513,l33QvHS3xBgAcPXs-WptjA)
+[Source](https://excalidraw.com/#room=070f2a9d07c6c64e4a0b,92yRUeXeRoGs0OpOe46wtg)
 
 ---
 
@@ -433,21 +433,25 @@ class MySubClassWithRepr2(MyClass, metaclass=better_repr_type):
 
 ---
 
-## But What Are They For, Actually? (1)
+## TODO: For developer experience, wrap your metas 
 
-* Provide special methods to classes
+---
+
+## But what are they good for, after all?
+
+* Providing special methods **to classes themselves**
   * `__repr__`
   * `__getitem__`
   * `__(...)__`
 
 ---
 
-## But What Are They For After All? (2)
+## And also good for...
 
-* Prepare the `namespace` (`.__dict__`) of a class
-* Intercept/register/customize class creation
-* Manipulate methods and attributes of the class during creation
-* Intercept/customize instance creation
+* Replacing the namespace container (`.__dict__`) of a class
+* Intercepting/registering/customizing the class creation itself
+* Manipulating methods and attributes of the class during creation
+* Intercepting/customizing instance creation
 
 Note:
 
@@ -467,28 +471,43 @@ Override the `__call__` of the metaclass to return `None`.
 
 ## What They Are NOT For
 
-* Influence instances after they are created
-* Provide **normal** attributes or methods to classes
+* Influencing instances after they are created
+* Providing **normal** attributes or methods to classes
   * only special methods!
 
 Note:
 
-MRO of normal class attributes never passes through the metaclass.
+MRO of normal class attributes never goes through the metaclass.
 
 ---
 
-## You Will (Probably) Never Write Metaclasses (1)
+## You Will (Probably) Never Write Metaclasses
+
+* `SuperClass.__init_subclass__()`
+* Class Decorators
+* `SuperClass.__class_getitem__()`
+
+---
+
+## `__init_subclass__`
 
 * `SuperClass.__init_subclass__()`
   * Called for each declared subclass
     * Even in indirect subclasses
   * But not in the class where it is declared
 
+Note:
+
+Contrast `SuperClass.__init_subclass__()` with Metaclass: the former receives
+the class with namespace already instantiated (it's an "init" not a "new"), the
+latter gets to establish the namespace dict itself before that.
+
+TODO: Write sequence diagram for the whole process including class creation
+from meta, instance creation from class, method call in instance.
+
 ---
 
-## You Will (Probably) Never Write Metaclasses (2)
-
-Decorators:
+## Class Decorators
 
 ```python
 @decorator
@@ -501,16 +520,16 @@ class MyClass:
 
 Note:
 
-A decorator receives the class already made, and has the opportunity to modify it, and
-even replace it, before returning it.
+A decorator receives the class already made as it's only argument, and has the
+opportunity to modify it, and even replace it, before returning it.
 
 A good existing example is `@dataclass`, which creates methods in your classes.
 
 ---
 
-## You Will (Probably) Never Write Metaclasses (3)
+## `__class_getitem__`
 
-* `__class_getitem__`
+* `SuperClass.__class_getitem__`
   * Used by Python for *type hints*
 
 ```python
@@ -518,6 +537,11 @@ def print_steps(steps: list[str]): ...
 ```
 
 Note:
+
+Emphasize that we need `list[str]` to work on the class itself, not the
+instances, so the `__getitem__` would have to go into the `list` metaclass,
+which would make it harder to inherit from `list` and other classes with their
+own metaclasses, for example.
 
 Show `slides/code/slide20_meta_alternatives.py`
 
@@ -549,7 +573,7 @@ class MySubClass(SuperCls, keyword='Key', number=42):
 ```
 
 * But it is necessary to consume them:
-  * Where:
+  * Where?
     * `MetaClass.__new__()`
     * `SuperClass.__init_subclass__()`
   * Because `object.__init_subclass__()` does not accept them.
@@ -592,15 +616,17 @@ But subclasses of such a class may declare `table`.
 
 ## In Summary
 
-* Everything has classes, including the classes
+* Everything is an object and has a class
+  * including classes themselves
 * Metaclasses provide special methods for classes
   * And only special methods
 * Metaclasses have no influence over instances of the class
-  * method/attribute search does not flow to the metaclass
 * You can create (meta)classes for your classes
   * But you probably don't need to
 
 Note:
+
+* method/attribute search does not flow to the metaclass
 
 Some people think that Python is an objectifying language... Everything is an object!
 

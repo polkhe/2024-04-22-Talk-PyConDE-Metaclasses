@@ -21,7 +21,7 @@ class Anseriforme(metaclass=MetaAnseriforme):
         return cls.registro[name]
 
 
-ANSERIFORMES_VALIDOS = {
+VALID_ANATIDAE = {
     'Pato',
     'Ganso',
     'Marreco',
@@ -31,9 +31,9 @@ ANSERIFORMES_VALIDOS = {
 def verifica_anseriforme(cls):
     print("** verificando:", cls.__name__)
     name = cls.__name__
-    if name not in ANSERIFORMES_VALIDOS:
+    if name not in VALID_ANATIDAE:
         raise RuntimeError(
-            f"{name} não é suficientemente patético"
+            f"{name} is not quacky enough."
         )
 
 

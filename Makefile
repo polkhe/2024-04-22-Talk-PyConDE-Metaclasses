@@ -1,5 +1,5 @@
 DOCKER ?= podman
-#DOCKER=docker
+DOCKER=docker
 #DOCKER=sudo docker
 
 ROOT_DIR:=$(realpath $(dir $(firstword $(MAKEFILE_LIST))))
