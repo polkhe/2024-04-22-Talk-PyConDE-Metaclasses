@@ -1,27 +1,27 @@
 
-class MinhaClasse:
+class MyClass:
 
     x = 42
 
-    def dobrar(self):
+    def double(self):
         return self.x * 2
 
 
-class MeuMixin:
+class MyMixin:
 
-    def somar(self):
+    def increase(self):
         return self.x + 2
 
 
-class MinhaSubClasse(MinhaClasse, MeuMixin):
+class MySubClass(MyClass, MyMixin):
 
     x = 36
 
 
-def meu_gerador_de_subclasse(novo_x):
+def my_subclass_builder(new_x):
 
-    class MinhaSubClasseDinamica(MinhaClasse, MeuMixin):
+    class MySubClassDinamica(MyClass, MyMixin):
 
-        x = novo_x
+        x = new_x
 
-    return MinhaSubClasseDinamica
+    return MySubClassDinamica

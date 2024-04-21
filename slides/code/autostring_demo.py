@@ -1,7 +1,7 @@
 from autostring import AutoString
 
 
-class SaborDeSorvete(AutoString):
-    creme
-    morango
+class IceCreamFlavour(AutoString):
+    vanilla
+    banana
     chocolate

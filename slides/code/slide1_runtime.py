@@ -1,21 +1,21 @@
-print("*** Antes da constante", list(globals()), sep='\n')
+print("*** Before CONSTANT", list(globals()), sep='\n')
 
-CONSTANTE = "valor"
+CONSTANT = "value"
 
-print("*** Antes da classe", list(globals()), sep='\n')
+print("*** Before the class", list(globals()), sep='\n')
 
 
-class Pato:
+class Duck:
 
-    print("*** No começo da declaração da Classe", list(globals()), sep='\n')
+    print("*** Start of class declaration", list(globals()), sep='\n')
 
     def __init__(self):
-        print("*** Durante o init da instância", list(globals()), sep='\n')
+        print("*** Inside instance __init__", list(globals()), sep='\n')
 
     def quack(self):
-        print("Quack!")
+        print("Quak!")
 
-    print("*** No fim da declaração da classe", list(globals()), sep='\n')
+    print("*** End of class declaration", list(globals()), sep='\n')
 
 
-print("*** Depois da classe", list(globals()), sep='\n')
+print("*** After the class", list(globals()), sep='\n')

@@ -1,5 +1,5 @@
 
-class MinhaClasse:
+class MyClass:
 
     x = 42
 
@@ -7,10 +7,10 @@ class MinhaClasse:
         return self.x * 2
 
 
-class MinhaSubClasse(MinhaClasse):
+class MySubClass(MyClass):
 
     x = 36
 
     def __repr__(self):
-        return f'<MinhaSubClasse x={self.x}>'
+        return f'<MySubClass x={self.x}>'
 

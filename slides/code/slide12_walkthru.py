@@ -1,28 +1,28 @@
-print('* Início do módulo {__name__}')
+print('* Start of module {__name__}')
 
 from collections import UserDict
 
 class LogDict(UserDict):
     def __setitem__(self, key, item):
-        print("*** novo atributo", key)
+        print("*** new attribute", key)
         return super().__setitem__(key, item)
 
 
-class MetaAnseriforme(type):
-    print('** Início da metaclasse')
+class MetaWaterfowl(type):
+    print('** Start of metaclass')
 
     @classmethod
     def __prepare__(metacls, cls_name, cls_bases, **kw):
-        print("*** preparando o namespace da classe")
+        print("*** preparing class namespace")
 
         def debug(msg):
-            print(f"** na classe:", cls_name, "mensagem:", msg)
+            print(f"** in class:", cls_name, "message:", msg)
 
         cls_dict = LogDict({'debug': debug})
         return cls_dict
 
     def __new__(meta_cls, cls_name, bases, cls_dict, **kw):
-        print(f'*** __new__ da metaclasse')
+        print(f'*** __new__ in metaclass')
 
         cls_dict = dict(cls_dict)
         del cls_dict['debug']
@@ -31,55 +31,55 @@ class MetaAnseriforme(type):
         return cls
 
     def __init__(cls, cls_name, bases, cls_dict, **kw):
-        print(f'*** __init__ da metaclasse')
+        print(f'*** __init__ in metaclass')
         super().__init__(cls_name, bases, cls_dict, **kw)
 
     def __call__(cls):
-        print('*** __call__ da metaclasse')
+        print('*** __call__ in metaclass')
         return super().__call__()
 
     def __repr__(cls):
         cls_name = cls.__name__
-        return f"<Classe {cls_name!r} com repr MetaAnseriforme>"
+        return f"<Class {cls_name!r} with MetaWaterfowl repr>"
 
-    print('** Fim da metaclasse')
-
-
-print('* Entre metaclasse e classe')
+    print('** End of metaclass')
 
 
-class Pato(metaclass=MetaAnseriforme):
+print('* Between metaclass and class')
 
-    debug("No começo da declaração da classe")
+
+class Duck(metaclass=MetaWaterfowl):
+
+    debug("Start of class declaration")
 
     def __new__(cls):
-        print("*** Durante o __new__ da classe")
+        print("*** Inside __new__ of Duck")
         return super().__new__(cls)
 
     def __init__(self):
-        print("*** Durante o init da classe")
+        print("*** Inside __init__ of Duck")
 
     def quack(self):
         print("Quack!")
 
-    debug("No fim da declaração da classe")
+    debug("End of class declaration")
 
 
-print('* Entre classe e subclasse')
+print('* Between class and subclass')
 
 
-class PatoMandarim(Pato):
+class MandarinDuck(Duck):
 
-    debug("declarando a subclasse")
+    debug("Start of subclass declaration")
 
     def quack(self):
-        print("Qué!")
+        print("Quak!")
 
-    debug("fim da declaração da subclasse")
+    debug("End of subclass declaration")
 
 
-print('* Entre subclasse e instância')
+print('* Between subclass and instance creation')
 
-pato = Pato()
+duck = Duck()
 
-print(f'* Fim do módulo {__name__}')
+print(f'* End of module {__name__}')

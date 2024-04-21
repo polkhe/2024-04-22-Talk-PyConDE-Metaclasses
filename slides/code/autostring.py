@@ -2,10 +2,10 @@ class AutoStringDict(dict):
 
     def __missing__(self, key: str):
         if key.startswith('__') and key.endswith('__'):
-            # pula attributos/metodos especiais
+            # skip special atributes/methods
             raise KeyError(key)
 
-        # cria a chave e o valor automaticamente.
+        # creates key and value on demand
         self[key] = key.capitalize()
         return key
 

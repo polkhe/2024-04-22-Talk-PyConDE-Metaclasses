@@ -1,17 +1,17 @@
 
-from slide12_walkthru import MetaAnseriforme
+from slide12_walkthru import MetaWaterfowl
 
-print("# antes da classe com __init_subclass__")
+print("# Before class with __init_subclass__")
 
-class Cisne(metaclass=MetaAnseriforme):
+class Swan(metaclass=MetaWaterfowl):
 
     def __init_subclass__(subclass, **kw):
-      print("consumindo", kw)
+      print("consuming", kw)
       super().__init_subclass__(subclass)
 
-print("# entre a classe com __init_subclass__ e a subclasse")
+print("# Between class with __init_subclass__ and subclass")
 
-class CisneNegro(Cisne, palavra="chave"):
+class BlackSwan(Swan, key="word"):
     pass
 
-print(f"# fim do módulo {__name__}")
+print(f"# End of module {__name__}")

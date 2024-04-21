@@ -1,7 +1,7 @@
-class MetaAnseriforme(type):
+class MetaWaterfowl(type):
 
     def __init__(cls, cls_name, bases, cls_dict, **kw):
-        print(f'** __init__ da metaclasse para', cls_name)
+        print(f'** __init__ in metaclass para', cls_name)
         super().__init__(cls_name, bases, cls_dict, **kw)
 
     def __repr__(cls):
@@ -9,7 +9,7 @@ class MetaAnseriforme(type):
         return f"<Classe para fazer {cls_name!r}>"
 
 
-class Anseriforme(metaclass=MetaAnseriforme):
+class Waterfowl(metaclass=MetaWaterfowl):
 
     registro = {}
 
@@ -22,13 +22,13 @@ class Anseriforme(metaclass=MetaAnseriforme):
 
 
 VALID_ANATIDAE = {
-    'Pato',
+    'Duck',
     'Ganso',
     'Marreco',
     'Cisne',
 }
 
-def verifica_anseriforme(cls):
+def verifica_Waterfowl(cls):
     print("** verificando:", cls.__name__)
     name = cls.__name__
     if name not in VALID_ANATIDAE:
@@ -37,8 +37,8 @@ def verifica_anseriforme(cls):
         )
 
 
-@verifica_anseriforme
-class Pato(Anseriforme):
+@verifica_Waterfowl
+class Duck(Waterfowl):
 
     def quack(self):
         print("Quack!")
