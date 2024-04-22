@@ -1,21 +1,26 @@
-print("*** Before CONSTANT", list(globals()), sep='\n')
+
+def pause(msg):
+    input(f'{msg}. globals:\n{list(globals())}')
+
+
+pause("*** Before CONSTANT")
 
 CONSTANT = "value"
 
-print("*** Before the class", list(globals()), sep='\n')
+pause("*** Before the class")
 
 
 class Duck:
 
-    print("*** Start of class declaration", list(globals()), sep='\n')
+    pause("*** Start of class declaration")
 
     def __init__(self):
-        print("*** Inside instance __init__", list(globals()), sep='\n')
+        pause("*** Inside instance __init__")
 
     def quack(self):
-        print("Quak!")
+        pause("Quak!")
 
-    print("*** End of class declaration", list(globals()), sep='\n')
+    pause("*** End of class declaration")
 
 
-print("*** After the class", list(globals()), sep='\n')
+pause("*** After the class")

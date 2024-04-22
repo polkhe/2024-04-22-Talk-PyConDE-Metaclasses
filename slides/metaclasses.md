@@ -30,6 +30,8 @@ Launch x11vnc
 
 Launch Remote Desktop Viewer, move it to the beamer display.
 
+bit.ly/pyconde-metaclass
+
 ---
 
 ![Cover Fluent Python 2nd Ed.](img/fluent-python.png)
@@ -180,15 +182,15 @@ Classes are values too!
 
 Note:
 
-In Python, all declared things are assigned to variables, including
+In Python, all declared things are bound to variables, including
 functions and classes!
 
-Classes (and functions) can be assigned to variables, lists, and dictionaries.
+Classes (and functions) can be bound to variables, added to lists, and set as dictionaries values.
 
 Demonstrate overriding the variables in which the classes were declared,
 and instantiate the classes through the variables in which they were saved.
 
-```text
+```python
 a = [1, 2, 3]
 b = a
 b.append(4)
@@ -196,15 +198,12 @@ b
 a
 ```
 
-I can assign classes to other variables
+I can bind classes to other variables
 
-```text
+```python
 MyClass2 = MyClass
-
 instance2 = MyClass2()
-
 MyClass = None
-
 instance = MyClass()
 ```
 
@@ -212,7 +211,7 @@ I can put classes in lists, or place them in dictionaries
 
 By the way, the contents of imported modules is in a dictionary:
 
-```text
+```python
 slide1_runtime.__dict__.keys()
 
 {key: value for key, value in slide1_runtime.__dict__.items() if not key.startswith('__')}
@@ -239,7 +238,7 @@ class Duck:
 ```
 
 * Generate a class
-* Assign to the class a variable
+* Bind the class to a variable
   * With the same name as the class
 
 Note:
@@ -267,9 +266,7 @@ Demonstrate `obj.__class__`, `type(obj)`, and `isinstance(obj, class)`
 ```text
 duck.__class__
 type(duck)
-
 duck.__class__ is type(duck)
-
 duck.__class__ is slide1_runtime.Duck
 
 ```
@@ -719,6 +716,7 @@ Note:
 TODO:
 
 * Create exercises
+ * slide1_runtime.py
 * Decide how to share code
   * Binder
   * Google Drive Collaboratory

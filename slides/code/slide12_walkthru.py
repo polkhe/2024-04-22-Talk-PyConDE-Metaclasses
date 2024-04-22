@@ -16,13 +16,13 @@ class MetaWaterfowl(type):
         print("*** preparing class namespace")
 
         def debug(msg):
-            print(f"** in class:", cls_name, "message:", msg)
+            print("** in class:", cls_name, "message:", msg)
 
         cls_dict = LogDict({'debug': debug})
         return cls_dict
 
     def __new__(meta_cls, cls_name, bases, cls_dict, **kw):
-        print(f'*** __new__ in metaclass')
+        print('*** __new__ in metaclass')
 
         cls_dict = dict(cls_dict)
         del cls_dict['debug']
@@ -31,7 +31,7 @@ class MetaWaterfowl(type):
         return cls
 
     def __init__(cls, cls_name, bases, cls_dict, **kw):
-        print(f'*** __init__ in metaclass')
+        print('*** __init__ in metaclass')
         super().__init__(cls_name, bases, cls_dict, **kw)
 
     def __call__(cls):
@@ -40,7 +40,7 @@ class MetaWaterfowl(type):
 
     def __repr__(cls):
         cls_name = cls.__name__
-        return f"<Class {cls_name!r} with MetaWaterfowl repr>"
+        return "<Class {cls_name!r} with MetaWaterfowl repr>"
 
     print('** End of metaclass')
 

@@ -16,7 +16,6 @@ run:
 
 sharescreen:
 	x11vnc -forever \
-		-display :0 \
 		-clip xinerama1 \
 		-shared \
 		-localhost \

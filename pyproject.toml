@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "2022-10-23-talk-pythonbrasil-metaclasses"
+name = "2024-04-22-Talk-PyConDE-Metaclasses"
 version = "0.1.0"
 description = "Metaclasses: Pra que servem? Onde vivem? Como se reproduzem?"
 authors = ["Leonardo Rochael Almeida <leorochael@gmail.com>"]
@@ -7,8 +7,9 @@ authors = ["Leonardo Rochael Almeida <leorochael@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 ipython = "^8.5.0"
-
-[tool.poetry.dev-dependencies]
+jupyter = "^1.0.0"
+ipykernel = "^6.29.4"
+setuptools = "^69.5.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
