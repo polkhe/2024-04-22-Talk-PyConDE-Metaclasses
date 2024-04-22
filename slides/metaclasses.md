@@ -643,7 +643,7 @@ But subclasses of such a class may declare `table`.
   * And only special methods
 * Metaclasses have no influence over instances of the class
 * You can create (meta)classes for your classes
-  * But you'll probably not need to
+  * But you'll probably won't
 
 Note:
 
@@ -663,9 +663,11 @@ Metaclass is for making frameworks, like SQLAlchemy or Pydantic.
 wonder whether you need them, you don’t (the people who actually need them know
 with certainty that they need them, and don’t need an explanation about why).
 
-  — Tim Peters, inventor of the timsort algorithm and prolific Python contributor
+  — Tim Peters
 
 Note:
+
+Tim Peters: inventor of the timsort algorithm and prolific Python contributor.
 
 So why study them?
 

@@ -1,3 +1,15 @@
+.reveal h1 {
+  --r-heading-color: #035624;
+}
+
+.reveal h2 {
+  --r-heading-color: #067A46;
+}
+
+.reveal {
+  --r-main-color: #035624;
+}
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -7,11 +19,28 @@
   text-transform: none;
 }
 
+:root {
+  --r-background-color: white;
+}
+
+body section img {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px 0px;
+}
+
 p:has(> img[src*="#img-float-right"]) {
   float: right;    
   margin: 0 0 0 15px;
 }
 
-section:has(> h2#obrigado) p {
+section:has(> h2#thank-you) p {
   text-align: left;    
+}
+
+section blockquote {
+  text-align: left;    
+}
+
+body .hf-logo-wrapper {
+  width: 98vw;
+  padding-left: 20px;
 }
