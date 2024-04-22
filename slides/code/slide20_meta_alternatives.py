@@ -40,10 +40,3 @@ def check_waterfowl(cls):
         )
     print('** verified:', cls.__name__)
     return cls
-
-
-@check_waterfowl
-class Duck(Waterfowl):
-
-    def quack(self):
-        print("Quack!")
