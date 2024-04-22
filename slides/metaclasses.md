@@ -444,7 +444,7 @@ class MySubClassWithRepr2(MyClass, metaclass=better_repr_type):
 
 ---
 
-## TODO: For developer experience, wrap your metas 
+## TODO: For developer experience, wrap your metas
 
 ---
 

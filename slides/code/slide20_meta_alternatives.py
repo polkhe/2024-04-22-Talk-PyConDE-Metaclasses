@@ -38,6 +38,8 @@ def check_waterfowl(cls):
         raise RuntimeError(
             f"What a quack! {name} is not quacky enough."
         )
+    print('** verified:', cls.__name__)
+    return cls
 
 
 @check_waterfowl
